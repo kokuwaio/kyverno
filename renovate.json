@@ -1,0 +1,17 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["kokuwaio/renovate-config"],
+	"customManagers": [
+		{
+			"customType": "regex",
+			"managerFilePatterns": ["Dockerfile", ".woodpecker/build.yaml"],
+			"matchStrings": [
+				"kokuwaio/kyverno:(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)",
+				"kyverno/kyverno/releases/download/(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)",
+				"version: (?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)"
+			],
+			"datasourceTemplate": "github-releases",
+			"packageNameTemplate": "kyverno/kyverno"
+		}
+	]
+}
