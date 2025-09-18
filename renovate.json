@@ -8,6 +8,7 @@
 			"matchStrings": [
 				"kokuwaio/kyverno:(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)",
 				"kyverno/kyverno/releases/download/(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)",
+				"kyverno-cli_v(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)_linux_",
 				"version: (?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)"
 			],
 			"datasourceTemplate": "github-releases",
