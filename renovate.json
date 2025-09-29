@@ -4,15 +4,24 @@
 	"customManagers": [
 		{
 			"customType": "regex",
-			"managerFilePatterns": ["Dockerfile", ".woodpecker/build.yaml"],
+			"managerFilePatterns": ["README.md", "Dockerfile", ".woodpecker/build.yaml"],
 			"matchStrings": [
 				"kokuwaio/kyverno:(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)",
-				"kyverno/kyverno/releases/download/(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)",
-				"kyverno-cli_v(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)_linux_",
+				"kyverno/kyverno/releases/download/(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)/kyverno-cli_(?:v[0-9]+\\.[0-9]+\\.[0-9]+)_linux_",
+				"kyverno/kyverno/releases/download/(?:v[0-9]+\\.[0-9]+\\.[0-9]+)/kyverno-cli_(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)_linux_",
 				"version: (?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)"
 			],
 			"datasourceTemplate": "github-releases",
 			"packageNameTemplate": "kyverno/kyverno"
+		},{
+			"customType": "regex",
+			"managerFilePatterns": ["Dockerfile"],
+			"matchStrings": [
+				"kustomize/releases/download/kustomize%2F(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)/kustomize_(?:v[0-9]+\\.[0-9]+\\.[0-9]+)_linux_",
+				"kustomize/releases/download/kustomize%2F(?:v[0-9]+\\.[0-9]+\\.[0-9]+)/kustomize_(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)_linux_"
+			],
+			"datasourceTemplate": "github-releases",
+			"packageNameTemplate": "kubernetes-sigs/kustomize"
 		}
 	]
 }

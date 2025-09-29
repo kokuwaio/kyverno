@@ -7,15 +7,14 @@ FROM docker.io/library/bash:5.3.3@sha256:cc444a5a327f8e42318b2772b392f8dd1a9dcb9
 SHELL ["/usr/local/bin/bash", "-u", "-e", "-o", "pipefail", "-c"]
 
 ARG TARGETARCH
-RUN wget -q \
-		"https://dl.k8s.io/release/v1.33.1/bin/linux/$TARGETARCH/kubectl" \
-		"https://dl.k8s.io/release/v1.33.1/bin/linux/$TARGETARCH/kubectl.sha256" && \
-	echo " kubectl" >> kubectl.sha256 && sha256sum -csw kubectl.sha256 && rm kubectl.sha256 && \
-	mv kubectl /usr/local/bin/kubectl && chmod 555 /usr/local/bin/kubectl
 RUN [[ $TARGETARCH == amd64 ]] && export ARCH=x86_64; \
 	[[ $TARGETARCH == arm64 ]] && export ARCH=arm64; \
 	[[ -z ${ARCH:-} ]] && echo "Unknown arch: $TARGETARCH" && exit 1; \
 	wget -q "https://github.com/kyverno/kyverno/releases/download/v1.15.1/kyverno-cli_v1.15.1_linux_$ARCH.tar.gz" --output-document=- | \
-	tar --gz --extract --to-stdout kyverno  > /usr/local/bin/kyverno && \
-	chmod 555 /usr/local/bin/kyverno
+	tar --gz --extract --to-stdout kyverno > /usr/local/bin/kyverno && chmod 555 /usr/local/bin/kyverno
+RUN wget -q "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.7.0/kustomize_v5.7.0_linux_$TARGETARCH.tar.gz" --output-document=- | \
+	tar --gz --extract --to-stdout kustomize > /usr/local/bin/kustomize && chmod 555 /usr/local/bin/kustomize
+
+COPY --chmod=555 entrypoint.sh /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 USER 1000:1000

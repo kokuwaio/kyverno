@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  FOO: BAR
+kind: ConfigMap
+metadata:
+  name: test
+  namespace: default

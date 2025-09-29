@@ -1,0 +1,10 @@
+resources: [configmap.yaml]
+
+patches:
+  - target:
+      kind: ConfigMap
+      name: test
+    patch: |-
+      - op: replace
+        path: /data/PATCHED
+        value: foo.yo.bar

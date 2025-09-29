@@ -40,7 +40,7 @@ steps:
         - docker.io/kokuwaio/kyverno:latest
         - docker.io/kokuwaio/kyverno:v1.15.1
         - ghcr.io/kokuwaio/kyverno:latest
-        - ghcr.io/kokuwaio/kyvernov:v1.15.1
+        - ghcr.io/kokuwaio/kyverno:v1.15.1
       auth:
         "https://index.docker.io/v1/":
           username: {from_secret: docker_io_username}
