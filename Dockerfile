@@ -10,7 +10,7 @@ ARG TARGETARCH
 RUN [[ $TARGETARCH == amd64 ]] && export ARCH=x86_64; \
 	[[ $TARGETARCH == arm64 ]] && export ARCH=arm64; \
 	[[ -z ${ARCH:-} ]] && echo "Unknown arch: $TARGETARCH" && exit 1; \
-	wget -q "https://github.com/kyverno/kyverno/releases/download/v1.15.1/kyverno-cli_v1.15.1_linux_$ARCH.tar.gz" --output-document=- | \
+	wget -q "https://github.com/kyverno/kyverno/releases/download/v1.15.2/kyverno-cli_v1.15.2_linux_$ARCH.tar.gz" --output-document=- | \
 	tar --gz --extract --to-stdout kyverno > /usr/local/bin/kyverno && chmod 555 /usr/local/bin/kyverno
 RUN wget -q "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.7.0/kustomize_v5.7.0_linux_$TARGETARCH.tar.gz" --output-document=- | \
 	tar --gz --extract --to-stdout kustomize > /usr/local/bin/kustomize && chmod 555 /usr/local/bin/kustomize

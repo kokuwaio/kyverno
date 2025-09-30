@@ -24,7 +24,7 @@ Woodpecker:
 steps:
   kyverno:
     depends_on: []
-    image: kokuwaio/kokuwaio/kyverno:v1.15.1
+    image: kokuwaio/kokuwaio/kyverno:v1.15.2
     settings:
       manifests: kustomize
       policies: policies
@@ -37,7 +37,7 @@ kyverno:
   needs: []
   stage: lint
   image:
-    name: kokuwaio/kokuwaio/kyverno:v1.15.1
+    name: kokuwaio/kokuwaio/kyverno:v1.15.2
     entrypoint: [""]
   script: [/usr/local/bin/entrypoint.sh]
   variables:
@@ -48,7 +48,7 @@ kyverno:
 CLI:
 
 ```bash
-docker run --rm --volume=$(pwd):$(pwd):rw --workdir=$(pwd) kokuwaio/kyverno:v1.15.1
+docker run --rm --volume=$(pwd):$(pwd):rw --workdir=$(pwd) kokuwaio/kyverno:v1.15.2
 ```
 
 ## Settings
