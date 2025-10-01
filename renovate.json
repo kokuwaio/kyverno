@@ -17,11 +17,19 @@
 			"customType": "regex",
 			"managerFilePatterns": ["Dockerfile"],
 			"matchStrings": [
-				"kustomize/releases/download/kustomize%2F(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)/kustomize_(?:v[0-9]+\\.[0-9]+\\.[0-9]+)_linux_",
-				"kustomize/releases/download/kustomize%2F(?:v[0-9]+\\.[0-9]+\\.[0-9]+)/kustomize_(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)_linux_"
+				"kubernetes-sigs/kustomize/releases/download/kustomize%2F(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)/kustomize_(?:v[0-9]+\\.[0-9]+\\.[0-9]+)_linux_",
+				"kubernetes-sigs/kustomize/releases/download/kustomize%2F(?:v[0-9]+\\.[0-9]+\\.[0-9]+)/kustomize_(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)_linux_"
 			],
 			"datasourceTemplate": "github-releases",
 			"packageNameTemplate": "kubernetes-sigs/kustomize"
+		},{
+			"customType": "regex",
+			"managerFilePatterns": ["Dockerfile"],
+			"matchStrings": [
+				"mikefarah/yq/releases/download/(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)/yq_linux_"
+			],
+			"datasourceTemplate": "github-releases",
+			"packageNameTemplate": "mikefarah/yq"
 		}
 	]
 }

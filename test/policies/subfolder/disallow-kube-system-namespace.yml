@@ -1,7 +1,7 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: disallow-kube-system--namespace
+  name: disallow-kube-system-namespace
 spec:
   rules:
     - name: validate-namespace
@@ -11,7 +11,7 @@ spec:
               kinds: [ConfigMap]
       validate:
         failureAction: Enforce
-        message: Using 'kube-system-' namespace is not allowed.
+        message: Using 'kube-system' namespace is not allowed.
         pattern:
           metadata:
-            namespace: "!kube-system-"
+            namespace: "!kube-system"

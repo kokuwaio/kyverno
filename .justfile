@@ -33,8 +33,9 @@ size:
 # Test created image.
 @test:
 	docker build . --tag=kokuwaio/kyverno:dev --quiet
-	docker run --rm --read-only --volume=$(pwd):$(pwd):rw --workdir=$(pwd) --env=PLUGIN_POLICY=test/policies --env=PLUGIN_MANIFESTS=test/kustomize-fail-patched kokuwaio/kyverno:dev && fail || true
-	docker run --rm --read-only --volume=$(pwd):$(pwd):rw --workdir=$(pwd) --env=PLUGIN_POLICY=test/policies --env=PLUGIN_MANIFESTS=test/kustomize-fail-default kokuwaio/kyverno:dev && fail || true
-	docker run --rm --read-only --volume=$(pwd):$(pwd):rw --workdir=$(pwd) --env=PLUGIN_POLICY=test/policies --env=PLUGIN_MANIFESTS=test/kustomize              kokuwaio/kyverno:dev
-	docker run --rm --read-only --volume=$(pwd):$(pwd):rw --workdir=$(pwd) --env=PLUGIN_POLICY=test/policies --env=PLUGIN_MANIFESTS=test/manifests-fail-default kokuwaio/kyverno:dev && fail || true
-	docker run --rm --read-only --volume=$(pwd):$(pwd):rw --workdir=$(pwd) --env=PLUGIN_POLICY=test/policies --env=PLUGIN_MANIFESTS=test/manifests              kokuwaio/kyverno:dev
+	docker run --rm --read-only --volume=$(pwd):$(pwd):rw --workdir=$(pwd) --env=PLUGIN_POLICY=test/policies --env=PLUGIN_MANIFESTS=test/kustomize-fail-patched     kokuwaio/kyverno:dev || true
+	docker run --rm --read-only --volume=$(pwd):$(pwd):rw --workdir=$(pwd) --env=PLUGIN_POLICY=test/policies --env=PLUGIN_MANIFESTS=test/kustomize-fail-default     kokuwaio/kyverno:dev || true
+	docker run --rm --read-only --volume=$(pwd):$(pwd):rw --workdir=$(pwd) --env=PLUGIN_POLICY=test/policies --env=PLUGIN_MANIFESTS=test/kustomize                  kokuwaio/kyverno:dev
+	docker run --rm --read-only --volume=$(pwd):$(pwd):rw --workdir=$(pwd) --env=PLUGIN_POLICY=test/policies --env=PLUGIN_MANIFESTS=test/manifests-fail-default     kokuwaio/kyverno:dev || true
+	docker run --rm --read-only --volume=$(pwd):$(pwd):rw --workdir=$(pwd) --env=PLUGIN_POLICY=test/policies --env=PLUGIN_MANIFESTS=test/manifests-fail-kube-system kokuwaio/kyverno:dev || true
+	docker run --rm --read-only --volume=$(pwd):$(pwd):rw --workdir=$(pwd) --env=PLUGIN_POLICY=test/policies --env=PLUGIN_MANIFESTS=test/manifests                  kokuwaio/kyverno:dev

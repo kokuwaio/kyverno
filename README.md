@@ -27,7 +27,7 @@ steps:
     image: kokuwaio/kokuwaio/kyverno:v1.15.2
     settings:
       manifests: kustomize
-      policies: policies
+      policy: policies
 ```
 
 Gitlab: (using script is needed because of <https://gitlab.com/gitlab-org/gitlab/-/issues/19717>)
@@ -42,7 +42,7 @@ kyverno:
   script: [/usr/local/bin/entrypoint.sh]
   variables:
     PLUGIN_MANIFESTS: kustomize
-    PLUGIN_POLICIES: policies
+    PLUGIN_POLICY: policies
 ```
 
 CLI:
@@ -56,7 +56,7 @@ docker run --rm --volume=$(pwd):$(pwd):rw --workdir=$(pwd) kokuwaio/kyverno:v1.1
 | Settings Name      | Environment             | Default | Description                                   |
 | ------------------ | ----------------------- | ------- | --------------------------------------------- |
 | `manifests`        | PLUGIN_MANIFESTS        | `$PWD`  | Directory to search for Kubernetes manifests. |
-| `policiy`          | PLUGIN_POLICY           | `none`  | Directory/Git to search for policies to use.  |
+| `policy`           | PLUGIN_POLICY           | `none`  | Directory/Git to search for policies to use.  |
 | `warn-no-pass`     | PLUGIN_WARN_NO_PASS     | `true`  | Warn if no resources where checked.           |
 | `table`            | PLUGIN_TABLE            | `true`  | Display violations as table.                  |
 | `detailed-results` | PLUGIN_DETAILED_RESULTS | `true`  | Display violations with detailed results.     |
