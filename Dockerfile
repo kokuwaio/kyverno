@@ -3,19 +3,19 @@
 # hadolint only uses default locations https://github.com/hadolint/hadolint/issues/977
 # hadolint global ignore=DL4006
 
-FROM docker.io/library/bash:5.3.3@sha256:cc444a5a327f8e42318b2772b392f8dd1a9dcb9e00d3c847cc9e419eefa20419 AS yq
+FROM docker.io/library/bash:5.3.3@sha256:a997515f3878ae217d7f870e0c83e5addcaef9fb823ad26cca7eadbaad46a83f AS yq
 SHELL ["/usr/local/bin/bash", "-u", "-e", "-c"]
 ARG TARGETARCH
 RUN wget -q "https://github.com/mikefarah/yq/releases/download/v4.47.2/yq_linux_$TARGETARCH.tar.gz" --output-document=- | \
 	tar --gz --extract --to-stdout "./yq_linux_$TARGETARCH" > /usr/local/bin/yq && chmod 555 /usr/local/bin/yq
 
-FROM docker.io/library/bash:5.3.3@sha256:cc444a5a327f8e42318b2772b392f8dd1a9dcb9e00d3c847cc9e419eefa20419 AS kustomize
+FROM docker.io/library/bash:5.3.3@sha256:a997515f3878ae217d7f870e0c83e5addcaef9fb823ad26cca7eadbaad46a83f AS kustomize
 SHELL ["/usr/local/bin/bash", "-u", "-e", "-c"]
 ARG TARGETARCH
 RUN wget -q "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.7.0/kustomize_v5.7.0_linux_$TARGETARCH.tar.gz" --output-document=- | \
 	tar --gz --extract --to-stdout kustomize > /usr/local/bin/kustomize && chmod 555 /usr/local/bin/kustomize
 
-FROM docker.io/library/bash:5.3.3@sha256:cc444a5a327f8e42318b2772b392f8dd1a9dcb9e00d3c847cc9e419eefa20419 AS kyverno
+FROM docker.io/library/bash:5.3.3@sha256:a997515f3878ae217d7f870e0c83e5addcaef9fb823ad26cca7eadbaad46a83f AS kyverno
 SHELL ["/usr/local/bin/bash", "-u", "-e", "-c"]
 ARG TARGETARCH
 RUN [[ $TARGETARCH == amd64 ]] && export ARCH=x86_64; \
@@ -24,7 +24,7 @@ RUN [[ $TARGETARCH == amd64 ]] && export ARCH=x86_64; \
 	wget -q "https://github.com/kyverno/kyverno/releases/download/v1.15.2/kyverno-cli_v1.15.2_linux_$ARCH.tar.gz" --output-document=- | \
 	tar --gz --extract --to-stdout kyverno > /usr/local/bin/kyverno && chmod 555 /usr/local/bin/kyverno
 
-FROM docker.io/library/bash:5.3.3@sha256:cc444a5a327f8e42318b2772b392f8dd1a9dcb9e00d3c847cc9e419eefa20419 AS base
+FROM docker.io/library/bash:5.3.3@sha256:a997515f3878ae217d7f870e0c83e5addcaef9fb823ad26cca7eadbaad46a83f AS base
 COPY --link --from=yq /usr/local/bin/yq /usr/local/bin/yq
 COPY --link --from=kyverno /usr/local/bin/kyverno /usr/local/bin/kyverno
 COPY --link --from=kustomize /usr/local/bin/kustomize /usr/local/bin/kustomize
