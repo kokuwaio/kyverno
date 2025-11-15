@@ -21,7 +21,7 @@ ARG TARGETARCH
 RUN [[ $TARGETARCH == amd64 ]] && export ARCH=x86_64; \
 	[[ $TARGETARCH == arm64 ]] && export ARCH=arm64; \
 	[[ -z ${ARCH:-} ]] && echo "Unknown arch: $TARGETARCH" && exit 1; \
-	wget -q "https://github.com/kyverno/kyverno/releases/download/v1.15.2/kyverno-cli_v1.15.2_linux_$ARCH.tar.gz" --output-document=- | \
+	wget -q "https://github.com/kyverno/kyverno/releases/download/v1.16.0/kyverno-cli_v1.16.0_linux_$ARCH.tar.gz" --output-document=- | \
 	tar --gz --extract --to-stdout kyverno > /usr/local/bin/kyverno && chmod 555 /usr/local/bin/kyverno
 
 FROM docker.io/library/bash:5.3.3@sha256:ae4668c2560999e65e89532cd2ad1b6688bb23298189f0bd229ef80fa4bd0831 AS base
