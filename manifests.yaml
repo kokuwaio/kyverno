@@ -1,8 +1,0 @@
-apiVersion: v1
-data:
-  FOO: BAR
-  PATCHED: foo.yo.bar
-kind: ConfigMap
-metadata:
-  name: test
-  namespace: valid
