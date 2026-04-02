@@ -19,7 +19,7 @@ if [[ -n "${PLUGIN_POLICY:-}" ]]; then
 	if [[ "$PLUGIN_POLICY" =~ ^https://.* ]]; then
 		COMMAND+=" $PLUGIN_POLICY"
 	else
-		find "$PLUGIN_POLICY" -type f -iname '*.y*ml' -print0 | xargs -0 yq 'select(.apiVersion == "kyverno.io/v1" and (.kind == "ClusterPolicy" or .kind == "Policy") and (.spec.rules[] | has("context") == false))' > "$PWD/policies.yaml" 
+		find "$PLUGIN_POLICY" -type f -iname '*.y*ml' -print0 | xargs -0 yq 'select(.apiVersion == "kyverno.io/v1" and (.kind == "ClusterPolicy" or .kind == "Policy") and (.spec.rules[] | has("context") == false))' > "$PWD/policies.yaml"
 		COMMAND+=" $PWD/policies.yaml"
 	fi
 else
@@ -41,6 +41,14 @@ if [[ -f $PLUGIN_MANIFESTS/kustomization.yaml ]]; then
 	COMMAND+=" --resource=$PWD/manifests.yaml"
 else
 	COMMAND+=" --resource=$PLUGIN_MANIFESTS/"
+fi
+if [[ -n "${PLUGIN_EXCEPTIONS:-}" ]]; then
+	COMMAND+=" --exceptions=$PLUGIN_EXCEPTIONS"
+fi
+
+# custom args, e.g. docker run --rm --volume=$(pwd):$(pwd) --workdir=$(pwd) --env=CI=test kokuwaio/kyverno --format=json
+if [[ -n "${1:-}" ]]; then
+	COMMAND+=" $*"
 fi
 
 ##

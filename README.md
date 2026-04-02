@@ -57,6 +57,7 @@ docker run --rm --volume=$(pwd):$(pwd):rw --workdir=$(pwd) kokuwaio/kyverno:v1.1
 | ------------------ | ----------------------- | ------- | --------------------------------------------- |
 | `manifests`        | PLUGIN_MANIFESTS        | `$PWD`  | Directory to search for Kubernetes manifests. |
 | `policy`           | PLUGIN_POLICY           | `none`  | Directory/Git to search for policies to use.  |
+| `exceptions`       | PLUGIN_EXCEPTIONS       | `none`  | Policy exceptionsto apply.                    |
 | `warn-no-pass`     | PLUGIN_WARN_NO_PASS     | `true`  | Warn if no resources where checked.           |
 | `table`            | PLUGIN_TABLE            | `true`  | Display violations as table.                  |
 | `detailed-results` | PLUGIN_DETAILED_RESULTS | `true`  | Display violations with detailed results.     |
