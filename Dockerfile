@@ -6,7 +6,7 @@
 FROM docker.io/library/bash:5.3.12@sha256:0d2a1b7230ba3cae17a0fd5b29445b1729be49a8a34cb28cfd9ab0710cb98743 AS yq
 SHELL ["/usr/local/bin/bash", "-u", "-e", "-c"]
 ARG TARGETARCH
-RUN wget -q "https://github.com/mikefarah/yq/releases/download/v4.53.2/yq_linux_$TARGETARCH.tar.gz" --output-document=- | \
+RUN wget -q "https://github.com/mikefarah/yq/releases/download/v4.53.3/yq_linux_$TARGETARCH.tar.gz" --output-document=- | \
 	tar --gz --extract --to-stdout "./yq_linux_$TARGETARCH" > /usr/local/bin/yq && chmod 555 /usr/local/bin/yq
 
 FROM docker.io/library/bash:5.3.12@sha256:0d2a1b7230ba3cae17a0fd5b29445b1729be49a8a34cb28cfd9ab0710cb98743 AS kustomize
