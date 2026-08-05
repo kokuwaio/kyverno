@@ -11,7 +11,7 @@
     docker run --rm --read-only --volume=$PWD:$PWD:rw --workdir=$PWD kokuwaio/markdownlint:0.49.1 --fix
     docker run --rm --read-only --volume=$PWD:$PWD:ro --workdir=$PWD kokuwaio/renovate-config-validator:44
     docker run --rm --read-only --volume=$PWD:$PWD:ro --workdir=$PWD registry.kokuwa.io/kubectl:kustomize >/dev/null
-    docker run --rm --read-only --volume=$PWD:$PWD:ro --workdir=$PWD woodpeckerci/woodpecker-cli lint
+    docker run --rm --read-only --volume=$PWD:$PWD:ro --workdir=$PWD woodpeckerci/woodpecker-cli:v3 lint
 
 # Build image with local docker daemon.
 @build:
